@@ -1,20 +1,30 @@
+import { TextL, TitleXl } from "../../styles/global";
 import { Guarantees } from "./components/Guarantees";
-import { HomeContainer } from "./styles";
+import {
+  HomeContainer,
+  HomeContent,
+  StyledImg,
+  TitleContainer,
+} from "./styles";
+import Coffe from "../../assets/coffe.png";
 
 export function Home() {
   return (
     <>
       <HomeContainer>
-        <div>
-          <h1>Encontre o café perfeito para qualquer hora do dia</h1>
-          <p>
-            Com o Coffee Delivery você recebe seu café onde estiver, a qualquer
-            hora
-          </p>
-        </div>
-        <div>
+        <HomeContent>
+          <TitleContainer>
+            <TitleXl>
+              Encontre o café perfeito para qualquer hora do dia
+            </TitleXl>
+            <TextL $fontWeight="normal">
+              Com o Coffee Delivery você recebe seu café onde estiver, a
+              qualquer hora
+            </TextL>
+          </TitleContainer>
           <Guarantees />
-        </div>
+        </HomeContent>
+        <StyledImg src={Coffe} />
       </HomeContainer>
     </>
   );

@@ -41,10 +41,15 @@ export const GuaranteesContainer = styled.div`
   grid-template-rows: repeat(2, 1fr);
   grid-column-gap: 40px;
   grid-row-gap: 20px;
+  margin-top: 66px;
 `;
 
 export const GuaranteeInfo = styled.div`
   display: inline-flex;
   align-items: center;
   gap: 12px;
+
+  & p {
+    color: ${(props) => props.theme["base-text"]};
+  }
 `;
