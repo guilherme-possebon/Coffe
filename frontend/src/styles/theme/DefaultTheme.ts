@@ -1,10 +1,17 @@
 export const DefaultTheme = {
   "yellow-dark": "#C47F17",
   yellow: "#DBAC2C",
-  "yellow-night": "#F1E9C9",
+  "yellow-light": "#F1E9C9",
   "purple-dark": "#4B2995",
   purple: "#8047F8",
   "purple-light": "#EBE5F9",
+
+  "hover-yellow-dark": "#B17315",
+  "hover-yellow": "#D1A42A",
+  "hover-yellow-light": "#E0D8BA",
+  "hover-purple-dark": "#241447",
+  "hover-purple": "#5832AB",
+  "hover-purple-light": "#A4A0AD",
 
   "base-title": "#272221",
   "base-subtitle": "#403937",

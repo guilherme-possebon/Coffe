@@ -1,14 +1,13 @@
 import {
   CartContainer,
-  CartIcon,
   HeaderContainer,
   HeaderContent,
   HeaderLogo,
   InfosContainer,
-  Location,
-  MapPinStyled,
+  LocationContainer,
 } from "./styles";
 import Logo from "../../assets/logo.png";
+import { MapPin, ShoppingCartSimple } from "@phosphor-icons/react";
 
 export function Header() {
   return (
@@ -17,12 +16,12 @@ export function Header() {
         <HeaderContent>
           <HeaderLogo src={Logo} />
           <InfosContainer>
-            <Location>
-              <MapPinStyled size={24} weight="fill" />
+            <LocationContainer>
+              <MapPin size={24} weight="fill" />
               <span>Porto Alegre, RS</span>
-            </Location>
+            </LocationContainer>
             <CartContainer>
-              <CartIcon size={24} weight="fill" />
+              <ShoppingCartSimple size={24} weight="fill" />
             </CartContainer>
           </InfosContainer>
         </HeaderContent>

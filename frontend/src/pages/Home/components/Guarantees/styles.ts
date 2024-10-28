@@ -5,6 +5,7 @@ import {
   Timer,
 } from "@phosphor-icons/react";
 import styled from "styled-components";
+import { device } from "../../../../styles/global";
 
 interface BadgesBackgroundProps {
   $color: string;
@@ -36,12 +37,22 @@ export const BadgesBackground = styled.div<BadgesBackgroundProps>`
 `;
 
 export const GuaranteesContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  grid-column-gap: 40px;
-  grid-row-gap: 20px;
-  margin-top: 66px;
+  display: flex;
+  justify-content: center;
+`;
+export const GuaranteesContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-left: 8px;
+  margin-top: 1rem;
+
+  @media ${device.phone} {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-row-gap: 1rem;
+    margin-top: 2rem;
+  }
 `;
 
 export const GuaranteeInfo = styled.div`

@@ -4,6 +4,14 @@ interface TextProps {
   $fontWeight: string;
 }
 
+export const device = {
+  pocket: `(max-width: 600px)`,
+  phone: `(min-width: 600px)`,
+  tablet: `(min-width: 768px)`,
+  laptop: `(min-width: 992px)`,
+  desktop: `(min-width: 1200px)`,
+};
+
 const DefaultConfigForTitle = styled.h1`
   color: ${(props) => props.theme["base-title"]};
   line-height: 130%;
