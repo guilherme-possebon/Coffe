@@ -23,7 +23,7 @@ export function NumberInput() {
     } else setInputValue(0);
   };
   const handlePlus = () => {
-    if (inputValue > 99) {
+    if (inputValue >= 0 && inputValue < 99) {
       setInputValue(inputValue + 1);
     } else setInputValue(99);
   };
