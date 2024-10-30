@@ -1,20 +1,39 @@
 import { ShoppingCartSimple } from "@phosphor-icons/react";
 import Etradicional from "../../../../assets/cardsCoffee/ETradicional.png";
-import { TextS, TitleS } from "../../../../styles/global";
-import { Buy, BuyContainer, CardContainer, CartContainer } from "./styles";
+import { TextS, TitleM, TitleS } from "../../../../styles/global";
+import {
+  Buy,
+  BuyContainer,
+  CardContainer,
+  CardContent,
+  CartContainer,
+  CoffeeImg,
+  Price,
+  TagContent,
+} from "./styles";
 import { NumberInput } from "../../../../components/NumberInput";
+import { Tag } from "./components/Tag";
 
 export function Card() {
   return (
     <>
       <CardContainer>
-        <img src={Etradicional} alt="" />
-        <TitleS>Expresso Tradicional</TitleS>
-        <TextS $fontWeight="normal">
-          O tradicional café feito com água quente e grãos moídos
-        </TextS>
+        <CoffeeImg src={Etradicional} alt="" />
+        <CardContent>
+          <TitleS>Expresso Tradicional</TitleS>
+          <TagContent>
+            <Tag tagLabel="Tradicional" />
+            <Tag tagLabel="com leite" />
+            <Tag tagLabel="gelado" />
+          </TagContent>
+          <TextS $fontWeight="normal">
+            O tradicional café feito com água quente e grãos moídos
+          </TextS>
+        </CardContent>
         <BuyContainer>
-          <p>R$ 9,90</p>
+          <Price>
+            R$ <TitleM>9,90</TitleM>
+          </Price>
 
           <Buy>
             <NumberInput />

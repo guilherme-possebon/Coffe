@@ -36,7 +36,7 @@ export const NumberInputStyled = styled(NumberInputConfig)`
   font-family: "Roboto", serif;
   font-style: normal;
 
-  width: 4ch;
+  width: 2ch;
 
   &:focus {
     outline: none;
