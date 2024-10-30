@@ -1,6 +1,7 @@
 import { TextL, TitleXl } from "../../styles/global";
 import { Guarantees } from "./components/Guarantees";
 import {
+  HomeCardContent,
   HomeContainer,
   HomeContent,
   StyledImg,
@@ -27,7 +28,9 @@ export function Home() {
         </HomeContent>
         <StyledImg src={Coffee} />
       </HomeContainer>
-      <Card />
+      <HomeCardContent>
+        <Card imgSrc={} title="" />
+      </HomeCardContent>
     </>
   );
 }

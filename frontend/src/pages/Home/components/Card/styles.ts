@@ -37,10 +37,13 @@ export const BuyContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 20px;
+  margin-top: 32px;
+  margin-bottom: 20px;
 `;
 
 export const Buy = styled.div`
   display: flex;
+  align-items: center;
   gap: 8px;
 `;
 

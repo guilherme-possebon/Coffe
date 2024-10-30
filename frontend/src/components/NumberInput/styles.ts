@@ -17,12 +17,16 @@ export const NumberInputConfig = styled.input.attrs({
 `;
 
 export const PlusAndMinusStyled = styled.button`
-  color: ${(props) => props.theme.purple};
+  color: ${(props) => props.theme["purple-dark"]};
   border: none;
   background-color: ${(props) => props.theme["base-button"]};
   cursor: pointer;
   height: 16px;
   width: 16px;
+
+  &:hover {
+    color: ${(props) => props.theme.purple};
+  }
 `;
 
 export const NumberInputStyled = styled(NumberInputConfig)`

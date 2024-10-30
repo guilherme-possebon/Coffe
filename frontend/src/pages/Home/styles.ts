@@ -40,3 +40,9 @@ export const TitleContainer = styled.div`
     text-align: start;
   }
 `;
+
+export const HomeCardContent = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 36px;
+`;
