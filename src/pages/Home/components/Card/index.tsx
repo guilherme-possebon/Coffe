@@ -1,7 +1,6 @@
 import { ShoppingCartSimple } from "@phosphor-icons/react";
 import { TextS, TitleM, TitleS } from "../../../../styles/global";
 import {
-  Buy,
   BuyContainer,
   CardContainer,
   CardContent,
@@ -10,7 +9,6 @@ import {
   Price,
   TagContent,
 } from "./styles";
-import { NumberInput } from "../../../../components/NumberInput";
 import { Tag } from "./components/Tag";
 
 interface CardProps {
@@ -38,12 +36,9 @@ export function Card({ imgSrc, title, tags, text, price }: CardProps) {
             R$ <TitleM>{price}</TitleM>
           </Price>
 
-          <Buy>
-            <NumberInput />
-            <CartContainer>
-              <ShoppingCartSimple size={24} weight="fill" />
-            </CartContainer>
-          </Buy>
+          <CartContainer>
+            <ShoppingCartSimple size={24} weight="fill" />
+          </CartContainer>
         </BuyContainer>
       </CardContainer>
     </>

@@ -11,9 +11,26 @@ export const CardContainer = styled.div`
   padding: 0 20px;
 `;
 
+export const CardContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+`;
+
 export const CoffeeImg = styled.img`
   position: relative;
   top: -24px;
+`;
+
+export const BuyContainer = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 32px;
+  margin-bottom: 20px;
 `;
 
 export const CartContainer = styled.button`
@@ -32,21 +49,6 @@ export const CartContainer = styled.button`
   }
 `;
 
-export const BuyContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  margin-top: 32px;
-  margin-bottom: 20px;
-`;
-
-export const Buy = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-`;
-
 export const Price = styled.div`
   display: flex;
   align-items: center;
@@ -58,11 +60,4 @@ export const TagContent = styled.div`
   gap: 4px;
   flex-wrap: wrap;
   justify-content: center;
-`;
-
-export const CardContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  align-items: center;
 `;
