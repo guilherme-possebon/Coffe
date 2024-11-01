@@ -9,8 +9,39 @@ import {
 import Logo from "../../assets/logo.png";
 import { MapPin, ShoppingCartSimple } from "@phosphor-icons/react";
 import { CurrentLocation } from "./components/CurrentLocation";
+import { useEffect, useRef, useState } from "react";
 
 export function Header() {
+  const [isFixed, setIsFixed] = useState(false);
+  const cartRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        console.log("Is intersecting:", entry.isIntersecting); // This line will show the intersection state
+        if (!entry.isIntersecting && !isFixed) {
+          // Check if it's not already fixed
+          setIsFixed(true);
+        } else if (entry.isIntersecting && isFixed) {
+          setIsFixed(false);
+        }
+      },
+      { root: null, threshold: 0.1 }
+    );
+
+    const currentCartRef = cartRef.current;
+
+    if (currentCartRef) {
+      observer.observe(currentCartRef);
+    }
+
+    return () => {
+      if (currentCartRef) {
+        observer.unobserve(currentCartRef);
+      }
+    };
+  }, [isFixed]);
+
   return (
     <>
       <HeaderContainer>
@@ -21,9 +52,11 @@ export function Header() {
               <MapPin size={24} weight="fill" />
               <CurrentLocation />
             </LocationContainer>
-            <CartContainer>
-              <ShoppingCartSimple size={24} weight="fill" />
-            </CartContainer>
+            <div ref={cartRef}>
+              <CartContainer $isFixed={isFixed}>
+                <ShoppingCartSimple size={24} weight="fill" />
+              </CartContainer>
+            </div>
           </InfosContainer>
         </HeaderContent>
       </HeaderContainer>

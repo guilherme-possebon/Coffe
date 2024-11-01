@@ -1,23 +1,26 @@
 import styled from "styled-components";
 import { device } from "../../styles/global";
 
+interface CartContainerProps {
+  $isFixed: boolean;
+}
+
 export const HeaderContainer = styled.div`
   display: flex;
   justify-content: center;
-  width: 100%;
   padding: 32px;
 `;
 
 export const HeaderContent = styled.div`
   display: flex;
   justify-content: space-between;
-  max-width: 1200px;
   width: 100%;
 `;
 
 export const InfosContainer = styled.div`
   display: flex;
   gap: 12px;
+  position: relative;
 `;
 
 export const LocationContainer = styled.div`
@@ -30,12 +33,12 @@ export const LocationContainer = styled.div`
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 
-  & span {
+  & p {
     display: none;
   }
 
   @media ${device.phone} {
-    & span {
+    & p {
       display: block;
       color: ${(props) => props.theme["purple-dark"]};
     }
@@ -48,7 +51,7 @@ export const LocationContainer = styled.div`
   &:hover {
     background-color: ${(props) => props.theme["purple"]};
 
-    & span {
+    & p {
       color: ${(props) => props.theme["purple-light"]};
     }
 
@@ -58,7 +61,7 @@ export const LocationContainer = styled.div`
   }
 `;
 
-export const CartContainer = styled.button`
+export const CartContainer = styled.button<CartContainerProps>`
   display: flex;
   align-items: center;
   background-color: ${(props) => props.theme["yellow-light"]};
@@ -68,6 +71,16 @@ export const CartContainer = styled.button`
   border: none;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+
+  position: ${(props) => (props.$isFixed ? "fixed" : "static")};
+  top: ${(props) => (props.$isFixed ? "6px" : "auto")};
+  right: ${(props) => (props.$isFixed ? "6px" : "auto")};
+  z-index: 99;
+
+  @media ${device.desktop} {
+    top: ${(props) => (props.$isFixed ? "10px" : "auto")};
+    right: auto;
+  }
 
   &:hover {
     background-color: ${(props) => props.theme["yellow"]};

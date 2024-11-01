@@ -8,7 +8,6 @@ export function CurrentLocation() {
 
     const fetchLocationData = async (latitude: number, longitude: number) => {
       try {
-        console.log("aa");
         const response = await fetch(
           `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${apiUrl}`
         );
