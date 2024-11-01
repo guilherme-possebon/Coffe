@@ -1,13 +1,15 @@
 import { TagContainer } from "./styles";
 
 interface TagProps {
-  tagLabel: string;
+  tagLabel: string[];
 }
 
 export function Tag({ tagLabel }: TagProps) {
   return (
     <>
-      <TagContainer>{tagLabel}</TagContainer>
+      {tagLabel.map((tag) => (
+        <TagContainer key={tag}>{tag}</TagContainer>
+      ))}
     </>
   );
 }

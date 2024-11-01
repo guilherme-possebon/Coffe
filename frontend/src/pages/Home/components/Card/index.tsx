@@ -16,14 +16,12 @@ import { Tag } from "./components/Tag";
 interface CardProps {
   imgSrc: string;
   title: string;
-  tag: {
-    tagLabel: string;
-  };
+  tags: string[];
   text: string;
   price: string;
 }
 
-export function Card({ imgSrc, title, tag, text, price }: CardProps) {
+export function Card({ imgSrc, title, tags, text, price }: CardProps) {
   return (
     <>
       <CardContainer>
@@ -31,7 +29,7 @@ export function Card({ imgSrc, title, tag, text, price }: CardProps) {
         <CardContent>
           <TitleS>{title}</TitleS>
           <TagContent>
-            <Tag tagLabel={tag.tagLabel} />
+            <Tag tagLabel={tags} />
           </TagContent>
           <TextS $fontWeight="normal">{text}</TextS>
         </CardContent>
