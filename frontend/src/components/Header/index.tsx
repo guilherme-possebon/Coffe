@@ -8,6 +8,7 @@ import {
 } from "./styles";
 import Logo from "../../assets/logo.png";
 import { MapPin, ShoppingCartSimple } from "@phosphor-icons/react";
+import { CurrentLocation } from "./components/CurrentLocation";
 
 export function Header() {
   return (
@@ -18,7 +19,7 @@ export function Header() {
           <InfosContainer>
             <LocationContainer>
               <MapPin size={24} weight="fill" />
-              <span>Porto Alegre, RS</span>
+              <CurrentLocation />
             </LocationContainer>
             <CartContainer>
               <ShoppingCartSimple size={24} weight="fill" />
