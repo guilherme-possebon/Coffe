@@ -18,9 +18,8 @@ export function Header() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        console.log("Is intersecting:", entry.isIntersecting); // This line will show the intersection state
+        console.log("Is intersecting:", entry.isIntersecting);
         if (!entry.isIntersecting && !isFixed) {
-          // Check if it's not already fixed
           setIsFixed(true);
         } else if (entry.isIntersecting && isFixed) {
           setIsFixed(false);
@@ -53,7 +52,7 @@ export function Header() {
               <CurrentLocation />
             </LocationContainer>
             <div ref={cartRef}>
-              <CartContainer $isFixed={isFixed}>
+              <CartContainer to={"/cart"} $isFixed={isFixed}>
                 <ShoppingCartSimple size={24} weight="fill" />
               </CartContainer>
             </div>

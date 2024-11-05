@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { device } from "../../styles/global";
+import { Link } from "react-router-dom";
 
 interface CartContainerProps {
   $isFixed: boolean;
@@ -61,7 +62,7 @@ export const LocationContainer = styled.div`
   }
 `;
 
-export const CartContainer = styled.button<CartContainerProps>`
+export const CartContainer = styled(Link)<CartContainerProps>`
   display: flex;
   align-items: center;
   background-color: ${(props) => props.theme["yellow-light"]};
@@ -71,6 +72,7 @@ export const CartContainer = styled.button<CartContainerProps>`
   border: none;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  text-decoration: none;
 
   position: ${(props) => (props.$isFixed ? "fixed" : "static")};
   top: ${(props) => (props.$isFixed ? "6px" : "auto")};
