@@ -3,14 +3,17 @@ import { Router } from "./router";
 import { ThemeProvider } from "styled-components";
 import { DefaultTheme } from "./styles/theme/DefaultTheme";
 import { GlobalStyle } from "./styles/global";
+import { CardProvider } from "./context/cardContext";
 
 function App() {
   return (
     <>
       <ThemeProvider theme={DefaultTheme}>
-        <BrowserRouter>
-          <Router />
-        </BrowserRouter>
+        <CardProvider>
+          <BrowserRouter>
+            <Router />
+          </BrowserRouter>
+        </CardProvider>
         <GlobalStyle />
       </ThemeProvider>
     </>

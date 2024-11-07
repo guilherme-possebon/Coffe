@@ -10,8 +10,12 @@ import {
   TagContent,
 } from "./styles";
 import { Tag } from "./components/Tag";
+import { useCards } from "../../../../context/cardContext";
+import { useCallback } from "react";
+import Swal from "sweetalert2";
 
 interface CardProps {
+  id: number;
   imgSrc: string;
   title: string;
   tags: string[];
@@ -19,7 +23,33 @@ interface CardProps {
   price: string;
 }
 
-export function Card({ imgSrc, title, tags, text, price }: CardProps) {
+export function Card({ imgSrc, title, tags, text, price, id }: CardProps) {
+  const { setCards } = useCards();
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    },
+  });
+
+  const handleAddCard = useCallback(() => {
+    setCards((prevCards) => {
+      if (!prevCards.includes(id)) {
+        return [...prevCards, id];
+      }
+      Toast.fire({
+        icon: "warning",
+        title: "Café já adicionado!!",
+      });
+      return prevCards;
+    });
+  }, [id, setCards, Toast]);
   return (
     <>
       <CardContainer>
@@ -36,7 +66,7 @@ export function Card({ imgSrc, title, tags, text, price }: CardProps) {
             R$ <TitleM>{price}</TitleM>
           </Price>
 
-          <CartContainer>
+          <CartContainer type="button" onClick={handleAddCard}>
             <ShoppingCartSimple size={24} weight="fill" />
           </CartContainer>
         </BuyContainer>

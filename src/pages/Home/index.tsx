@@ -44,6 +44,7 @@ export function Home() {
       <HomeCardContent>
         {data?.map((card) => (
           <Card
+            id={card.id}
             key={card.id}
             imgSrc={card.imgSrc}
             title={card.title}

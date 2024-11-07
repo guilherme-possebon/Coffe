@@ -10,6 +10,7 @@ import Logo from "../../assets/logo.png";
 import { MapPin, ShoppingCartSimple } from "@phosphor-icons/react";
 import { CurrentLocation } from "./components/CurrentLocation";
 import { useEffect, useRef, useState } from "react";
+import { useCards } from "../../context/cardContext";
 
 export function Header() {
   const [isFixed, setIsFixed] = useState(false);
@@ -41,6 +42,8 @@ export function Header() {
     };
   }, [isFixed]);
 
+  const { cards } = useCards();
+
   return (
     <>
       <HeaderContainer>
@@ -54,6 +57,7 @@ export function Header() {
             <div ref={cartRef}>
               <CartContainer to={"/cart"} $isFixed={isFixed}>
                 <ShoppingCartSimple size={24} weight="fill" />
+                <span>{cards.length}</span>
               </CartContainer>
             </div>
           </InfosContainer>
