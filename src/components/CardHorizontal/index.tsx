@@ -26,7 +26,7 @@ export function CardHorizontal({ imgSrc, title, price }: CardProps) {
             <CardTitle>{title}</CardTitle>
             <InputsContainer>
               <NumberInput />
-              <RemoveContainer>
+              <RemoveContainer type="button">
                 <TrashStyled />
                 <p>Remover</p>
               </RemoveContainer>

@@ -25,7 +25,7 @@ export const InputsContainer = styled.div`
   gap: 8px;
 `;
 
-export const RemoveContainer = styled.div`
+export const RemoveContainer = styled.button`
   display: flex;
   align-items: center;
   padding: 8px;
@@ -33,6 +33,8 @@ export const RemoveContainer = styled.div`
   background-color: ${(props) => props.theme["base-button"]};
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
+  cursor: pointer;
+  border: none;
 
   &:hover {
     background-color: ${(props) => props.theme["base-hover"]};
