@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiUrl = "http://177.44.248.4:3001";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export interface ApiResponse {
   id: number;
