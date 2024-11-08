@@ -62,7 +62,7 @@ export const LocationContainer = styled.div`
   }
 `;
 
-export const CartContainer = styled(Link)<CartContainerProps>`
+export const CartHeaderContainer = styled(Link)<CartContainerProps>`
   display: flex;
   align-items: center;
   background-color: ${(props) => props.theme["yellow-light"]};
@@ -73,6 +73,7 @@ export const CartContainer = styled(Link)<CartContainerProps>`
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
+  position: relative;
 
   position: ${(props) => (props.$isFixed ? "fixed" : "static")};
   top: ${(props) => (props.$isFixed ? "6px" : "auto")};
@@ -88,6 +89,14 @@ export const CartContainer = styled(Link)<CartContainerProps>`
     background-color: ${(props) => props.theme["yellow"]};
     color: ${(props) => props.theme["yellow-light"]};
   }
+`;
+
+export const NumberOfCoffees = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: ${(props) => props.theme["yellow-light"]};
+  border-radius: 50%;
 `;
 
 export const HeaderLogo = styled.img``;

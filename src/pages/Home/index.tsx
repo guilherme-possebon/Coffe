@@ -8,7 +8,7 @@ import {
   TitleContainer,
 } from "./styles";
 import Coffee from "../../assets/coffee.png";
-import { Card } from "./components/Card";
+import { CardVertical } from "./components/CardVertical";
 import { useEffect, useState } from "react";
 import { ApiResponse, fetchData } from "../../api/api";
 
@@ -43,7 +43,7 @@ export function Home() {
       </HomeContainer>
       <HomeCardContent>
         {data?.map((card) => (
-          <Card
+          <CardVertical
             id={card.id}
             key={card.id}
             imgSrc={card.imgSrc}

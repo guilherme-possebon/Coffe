@@ -19,3 +19,20 @@ export const fetchData = async (): Promise<ApiResponse[] | undefined> => {
     console.log(error);
   }
 };
+
+export const fetchDataWithIds = async (
+  id: number[]
+): Promise<ApiResponse[] | undefined> => {
+  try {
+    console.log(id);
+    const response = await axios.get(apiUrl + `/cardsIds/`, {
+      params: {
+        ids: id,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+  return;
+};

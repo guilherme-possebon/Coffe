@@ -43,6 +43,7 @@ export const CartContainer = styled.button`
   border: none;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  position: relative;
 
   &:hover {
     background-color: ${(props) => props.theme["purple"]};
@@ -60,4 +61,10 @@ export const TagContent = styled.div`
   gap: 4px;
   flex-wrap: wrap;
   justify-content: center;
+`;
+
+export const CartPlusIcon = styled.div`
+  position: absolute;
+  top: 2px;
+  right: 3px;
 `;

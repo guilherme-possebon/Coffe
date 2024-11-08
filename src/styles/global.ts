@@ -127,3 +127,13 @@ export const ButtonM = styled(DefaultConfigForButton)`
   font-size: 12px;
   font-weight: normal;
 `;
+
+interface PriceProps {
+  $price: boolean;
+}
+
+export const PriceColor = styled(TitleM)<PriceProps>`
+  color: ${(props) => props.theme["base-text"]};
+  font-weight: ${(props) => (props.$price ? 800 : 700)};
+  font-size: ${(props) => (props.$price ? "24px" : "16px")};
+`;

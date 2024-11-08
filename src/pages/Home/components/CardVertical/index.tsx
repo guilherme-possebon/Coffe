@@ -1,10 +1,11 @@
 import { ShoppingCartSimple } from "@phosphor-icons/react";
-import { TextS, TitleM, TitleS } from "../../../../styles/global";
+import { PriceColor, TextS, TitleS } from "../../../../styles/global";
 import {
   BuyContainer,
   CardContainer,
   CardContent,
   CartContainer,
+  CartPlusIcon,
   CoffeeImg,
   Price,
   TagContent,
@@ -23,7 +24,14 @@ interface CardProps {
   price: string;
 }
 
-export function Card({ imgSrc, title, tags, text, price, id }: CardProps) {
+export function CardVertical({
+  imgSrc,
+  title,
+  tags,
+  text,
+  price,
+  id,
+}: CardProps) {
   const { setCards } = useCards();
 
   const Toast = Swal.mixin({
@@ -63,11 +71,12 @@ export function Card({ imgSrc, title, tags, text, price, id }: CardProps) {
         </CardContent>
         <BuyContainer>
           <Price>
-            R$ <TitleM>{price}</TitleM>
+            R$ <PriceColor $price={true}>{price}</PriceColor>
           </Price>
 
           <CartContainer type="button" onClick={handleAddCard}>
             <ShoppingCartSimple size={24} weight="fill" />
+            <CartPlusIcon>+</CartPlusIcon>
           </CartContainer>
         </BuyContainer>
       </CardContainer>

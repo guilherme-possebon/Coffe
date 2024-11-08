@@ -1,10 +1,11 @@
 import {
-  CartContainer,
+  CartHeaderContainer,
   HeaderContainer,
   HeaderContent,
   HeaderLogo,
   InfosContainer,
   LocationContainer,
+  NumberOfCoffees,
 } from "./styles";
 import Logo from "../../assets/logo.png";
 import { MapPin, ShoppingCartSimple } from "@phosphor-icons/react";
@@ -55,10 +56,12 @@ export function Header() {
               <CurrentLocation />
             </LocationContainer>
             <div ref={cartRef}>
-              <CartContainer to={"/cart"} $isFixed={isFixed}>
+              <CartHeaderContainer to={"/cart"} $isFixed={isFixed}>
                 <ShoppingCartSimple size={24} weight="fill" />
-                <span>{cards.length}</span>
-              </CartContainer>
+                <NumberOfCoffees>
+                  {cards.length > 0 ? cards.length : ""}
+                </NumberOfCoffees>
+              </CartHeaderContainer>
             </div>
           </InfosContainer>
         </HeaderContent>
