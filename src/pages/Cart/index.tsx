@@ -8,11 +8,15 @@ import { CartContainer } from "./styles";
 
 export function Cart() {
   const { cards } = useCards();
-  const [data, setdata] = useState<ApiResponse[] | undefined>([]);
+  const [data, setData] = useState<ApiResponse[] | undefined>([]);
 
   const fetchCards = async () => {
     const response = await fetchDataWithIds(cards);
-    setdata(response);
+    setData(response);
+  };
+
+  const handleRemove = async (id: number) => {
+    console.log("🚀 ~ handleRemove ~ id:", id);
   };
 
   useEffect(() => {
@@ -26,9 +30,11 @@ export function Cart() {
           <>
             <CardHorizontal
               key={info.id}
+              id={info.id}
               imgSrc={info.imgSrc}
               price={info.price}
               title={info.title}
+              onRemove={handleRemove}
             />
           </>
         ))}

@@ -103,6 +103,7 @@ export const TextM = styled(DefaultConfigForText)<TextProps>`
 export const TextS = styled(DefaultConfigForText)<TextProps>`
   font-size: 14px;
   font-weight: normal;
+  text-align: center;
 `;
 
 export const TextXs = styled(DefaultConfigForText)<TextProps>`

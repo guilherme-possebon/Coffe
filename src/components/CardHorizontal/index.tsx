@@ -12,11 +12,19 @@ import {
 } from "./styles";
 
 interface CardProps {
+  id: number;
   imgSrc: string;
   title: string;
   price: string;
+  onRemove: (id: number) => void;
 }
-export function CardHorizontal({ imgSrc, title, price }: CardProps) {
+export function CardHorizontal({
+  imgSrc,
+  title,
+  price,
+  onRemove,
+  id,
+}: CardProps) {
   return (
     <>
       <HorizontalContainer>
@@ -26,7 +34,7 @@ export function CardHorizontal({ imgSrc, title, price }: CardProps) {
             <CardTitle>{title}</CardTitle>
             <InputsContainer>
               <NumberInput />
-              <RemoveContainer type="button">
+              <RemoveContainer type="button" onClick={() => onRemove(id)}>
                 <TrashStyled />
                 <p>Remover</p>
               </RemoveContainer>
