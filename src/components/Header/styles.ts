@@ -95,8 +95,14 @@ export const NumberOfCoffees = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  background-color: ${(props) => props.theme["yellow-light"]};
+  background-color: ${(props) => props.theme["yellow-dark"]};
+  color: ${(props) => props.theme["yellow-light"]};
   border-radius: 50%;
+
+  &:hover {
+    background-color: ${(props) => props.theme["yellow"]};
+    color: ${(props) => props.theme["yellow-light"]};
+  }
 `;
 
 export const HeaderLogo = styled.img``;

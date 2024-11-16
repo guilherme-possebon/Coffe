@@ -3,17 +3,17 @@ import { Router } from "./router";
 import { ThemeProvider } from "styled-components";
 import { DefaultTheme } from "./styles/theme/DefaultTheme";
 import { GlobalStyle } from "./styles/global";
-import { CardProvider } from "./context/cardContext";
+import { CartProvider } from "./context/cartContext";
 
 function App() {
   return (
     <>
       <ThemeProvider theme={DefaultTheme}>
-        <CardProvider>
+        <CartProvider>
           <BrowserRouter>
             <Router />
           </BrowserRouter>
-        </CardProvider>
+        </CartProvider>
         <GlobalStyle />
       </ThemeProvider>
     </>

@@ -11,9 +11,11 @@ import {
   TagContent,
 } from "./styles";
 import { Tag } from "./components/Tag";
-import { useCards } from "../../../../context/cardContext";
-import { useCallback } from "react";
+import { useState } from "react";
 import Swal from "sweetalert2";
+import { addUserCards, UserCardPayload } from "../../../../api/api"; // Import the addUserCards function
+import { NumberInput } from "../../../../components/NumberInput";
+import { useCart } from "../../../../context/cartContext";
 
 interface CardProps {
   id: number;
@@ -32,11 +34,12 @@ export function CardVertical({
   price,
   id,
 }: CardProps) {
-  const { setCards } = useCards();
+  const [quantity, setQuantity] = useState<number>(1);
+  const { setCartItemsValue } = useCart();
 
   const Toast = Swal.mixin({
     toast: true,
-    position: "top-end",
+    position: "top",
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: true,
@@ -46,40 +49,55 @@ export function CardVertical({
     },
   });
 
-  const handleAddCard = useCallback(() => {
-    setCards((prevCards) => {
-      if (!prevCards.includes(id)) {
-        return [...prevCards, id];
-      }
-      Toast.fire({
-        icon: "warning",
-        title: "Café já adicionado!!",
-      });
-      return prevCards;
-    });
-  }, [id, setCards, Toast]);
-  return (
-    <>
-      <CardContainer>
-        <CoffeeImg src={imgSrc} alt="" />
-        <CardContent>
-          <TitleS>{title}</TitleS>
-          <TagContent>
-            <Tag tagLabel={tags} />
-          </TagContent>
-          <TextS $fontWeight="normal">{text}</TextS>
-        </CardContent>
-        <BuyContainer>
-          <Price>
-            R$ <PriceColor $price={true}>{price}</PriceColor>
-          </Price>
+  const handleAddCard = async () => {
+    try {
+      const payload: UserCardPayload = {
+        userId: 1,
+        cards: [
+          {
+            cardId: id,
+            quantity: quantity,
+          },
+        ],
+      };
 
-          <CartContainer type="button" onClick={handleAddCard}>
-            <ShoppingCartSimple size={24} weight="fill" />
-            <CartPlusIcon>+</CartPlusIcon>
-          </CartContainer>
-        </BuyContainer>
-      </CardContainer>
-    </>
+      await addUserCards(payload);
+
+      setCartItemsValue((prev: number) => prev + quantity);
+
+      Toast.fire({
+        icon: "success",
+        title: "Café adicionado ao seu carrinho!",
+      });
+    } catch (error) {
+      console.error("Failed to add card to cart:", error);
+      Toast.fire({
+        icon: "error",
+        title: "Falha ao adicionar o café!",
+      });
+    }
+  };
+
+  return (
+    <CardContainer>
+      <CoffeeImg src={imgSrc} alt={title} />
+      <CardContent>
+        <TitleS>{title}</TitleS>
+        <TagContent>
+          <Tag tagLabel={tags} />
+        </TagContent>
+        <TextS $fontWeight="normal">{text}</TextS>
+      </CardContent>
+      <BuyContainer>
+        <Price>
+          R$ <PriceColor $price={true}>{price}</PriceColor>
+        </Price>
+        <NumberInput quantity={quantity} setQuantity={setQuantity} />
+        <CartContainer type="button" onClick={handleAddCard}>
+          <ShoppingCartSimple size={24} weight="fill" />
+          <CartPlusIcon>+</CartPlusIcon>
+        </CartContainer>
+      </BuyContainer>
+    </CardContainer>
   );
 }

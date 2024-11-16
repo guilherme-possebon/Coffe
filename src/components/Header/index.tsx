@@ -11,11 +11,24 @@ import Logo from "../../assets/logo.png";
 import { MapPin, ShoppingCartSimple } from "@phosphor-icons/react";
 import { CurrentLocation } from "./components/CurrentLocation";
 import { useEffect, useRef, useState } from "react";
-import { useCards } from "../../context/cardContext";
+import { fetchUserCartItemCount } from "../../api/api";
+import { useCart } from "../../context/cartContext";
 
 export function Header() {
   const [isFixed, setIsFixed] = useState(false);
   const cartRef = useRef<HTMLDivElement>(null);
+  const [cartItems, setCartItems] = useState<number | undefined>(0);
+  const { cartItemsValue } = useCart(); // Get the cart item count from context
+
+  const getCartItemsQuantity = async () => {
+    const result = await fetchUserCartItemCount(1);
+    console.log(result);
+    setCartItems(result);
+  };
+
+  useEffect(() => {
+    getCartItemsQuantity();
+  }, [cartItemsValue]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -43,8 +56,6 @@ export function Header() {
     };
   }, [isFixed]);
 
-  const { cards } = useCards();
-
   return (
     <>
       <HeaderContainer>
@@ -59,7 +70,7 @@ export function Header() {
               <CartHeaderContainer to={"/cart"} $isFixed={isFixed}>
                 <ShoppingCartSimple size={24} weight="fill" />
                 <NumberOfCoffees>
-                  {cards.length > 0 ? cards.length : ""}
+                  {cartItems != undefined && cartItems > 0 ? cartItems : ""}
                 </NumberOfCoffees>
               </CartHeaderContainer>
             </div>
