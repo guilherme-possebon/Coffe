@@ -11,6 +11,13 @@ export interface ApiResponse {
   text: string;
 }
 
+export type CardsIdsType = {
+  id: number;
+  card: {
+    id: number;
+  };
+};
+
 export interface UserCardsResponse {
   id: number;
   user: {
@@ -72,12 +79,21 @@ export const fetchCardById = async (
   }
 };
 
+export const fetchUserCards = async (
+  id: number
+): Promise<CardsIdsType[] | undefined> => {
+  try {
+    const response = await axios.get(`${apiUrl}/user-cards/${id}/cardsid`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching card data:", error);
+  }
+};
+
 export async function updateUserCards(
   userId: number,
   payload: { cardId: number; quantity: number }
 ) {
-  const { cardId, quantity } = payload;
-  console.log("🚀 ~ cardId, quantity:", cardId, quantity);
   const response = await axios.post(
     `${apiUrl}/user-cards/${userId}/cards`,
     payload
@@ -92,7 +108,6 @@ export const fetchUserCartItemCount = async (
     const response = await axios.get(
       `${apiUrl}/user-cards/${userId}/cartItemCount`
     );
-    console.log("🚀 ~ response:", response);
     return response.data.itemCount;
   } catch (error) {
     console.error("Error fetching user cart item count:", error);

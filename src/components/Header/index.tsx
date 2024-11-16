@@ -22,7 +22,6 @@ export function Header() {
 
   const getCartItemsQuantity = async () => {
     const result = await fetchUserCartItemCount(1);
-    console.log(result);
     setCartItems(result);
   };
 
@@ -33,7 +32,6 @@ export function Header() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        console.log("Is intersecting:", entry.isIntersecting);
         if (!entry.isIntersecting && !isFixed) {
           setIsFixed(true);
         } else if (entry.isIntersecting && isFixed) {

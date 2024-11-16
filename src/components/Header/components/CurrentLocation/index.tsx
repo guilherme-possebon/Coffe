@@ -28,7 +28,6 @@ export function CurrentLocation() {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           const { latitude, longitude } = position.coords;
-          console.log(position.coords);
           fetchLocationData(latitude, longitude);
         },
         (error) => {

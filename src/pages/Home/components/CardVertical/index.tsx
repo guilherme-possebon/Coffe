@@ -13,9 +13,10 @@ import {
 import { Tag } from "./components/Tag";
 import { useState } from "react";
 import Swal from "sweetalert2";
-import { addUserCards, UserCardPayload } from "../../../../api/api"; // Import the addUserCards function
+import { addUserCards, UserCardPayload } from "../../../../api/api";
 import { NumberInput } from "../../../../components/NumberInput";
 import { useCart } from "../../../../context/cartContext";
+import { Link } from "react-router-dom";
 
 interface CardProps {
   id: number;
@@ -24,6 +25,8 @@ interface CardProps {
   tags: string[];
   text: string;
   price: string;
+  isAddedToCart: boolean | undefined;
+  onAddCard: (cardId: number) => void;
 }
 
 export function CardVertical({
@@ -33,6 +36,8 @@ export function CardVertical({
   text,
   price,
   id,
+  isAddedToCart,
+  onAddCard,
 }: CardProps) {
   const [quantity, setQuantity] = useState<number>(1);
   const { setCartItemsValue } = useCart();
@@ -41,7 +46,7 @@ export function CardVertical({
     toast: true,
     position: "top",
     showConfirmButton: false,
-    timer: 3000,
+    timer: 1000,
     timerProgressBar: true,
     didOpen: (toast) => {
       toast.onmouseenter = Swal.stopTimer;
@@ -62,6 +67,8 @@ export function CardVertical({
       };
 
       await addUserCards(payload);
+
+      onAddCard(id);
 
       setCartItemsValue((prev: number) => prev + quantity);
 
@@ -92,11 +99,21 @@ export function CardVertical({
         <Price>
           R$ <PriceColor $price={true}>{price}</PriceColor>
         </Price>
-        <NumberInput quantity={quantity} setQuantity={setQuantity} />
-        <CartContainer type="button" onClick={handleAddCard}>
-          <ShoppingCartSimple size={24} weight="fill" />
-          <CartPlusIcon>+</CartPlusIcon>
-        </CartContainer>
+        {isAddedToCart ? (
+          <>
+            <CartContainer as={Link} to={"/cart"}>
+              <ShoppingCartSimple size={24} weight="fill" />
+            </CartContainer>
+          </>
+        ) : (
+          <>
+            <NumberInput quantity={quantity} setQuantity={setQuantity} />
+            <CartContainer type="button" onClick={handleAddCard}>
+              <ShoppingCartSimple size={24} weight="fill" />
+              <CartPlusIcon>+</CartPlusIcon>
+            </CartContainer>
+          </>
+        )}
       </BuyContainer>
     </CardContainer>
   );

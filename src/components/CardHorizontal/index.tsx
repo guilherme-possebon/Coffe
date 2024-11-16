@@ -17,7 +17,7 @@ interface CardProps {
   imgSrc: string;
   title: string;
   price: number;
-  onRemove: (id: number) => void;
+  onRemove: (id: number, quantity: number) => void;
   quantityNumber: number;
 }
 
@@ -39,7 +39,10 @@ export function CardHorizontal({
           <CardTitle>{title}</CardTitle>
           <InputsContainer>
             <NumberInput quantity={quantity} setQuantity={setQuantity} />
-            <RemoveContainer type="button" onClick={() => onRemove(id)}>
+            <RemoveContainer
+              type="button"
+              onClick={() => onRemove(id, quantity)}
+            >
               <TrashStyled />
               <p>Remover</p>
             </RemoveContainer>

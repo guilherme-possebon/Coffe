@@ -10,19 +10,51 @@ import {
 import Coffee from "../../assets/coffee.png";
 import { CardVertical } from "./components/CardVertical";
 import { useEffect, useState } from "react";
-import { ApiResponse, fetchData } from "../../api/api";
+import {
+  ApiResponse,
+  CardsIdsType,
+  fetchData,
+  fetchUserCards,
+} from "../../api/api";
+import Swal from "sweetalert2";
 
 export function Home() {
   const [data, setData] = useState<ApiResponse[] | undefined>([]);
+  const [addedCards, setAddedCards] = useState<CardsIdsType[] | undefined>([]);
 
-  useEffect(() => {
-    getCoffees();
-  }, []);
+  const fetchCards = async () => {
+    try {
+      const response = await fetchUserCards(1);
+      setAddedCards(response);
+    } catch (error) {
+      console.error("Failed to fetch cards:", error);
+      Swal.fire("Erro", "Falha ao carregar o carrinho.", "error");
+    }
+  };
+
+  const mergedData = data?.map((card) => ({
+    ...card,
+    isAddedToCart: addedCards?.some(
+      (addedCard) => addedCard.card.id === card.id
+    ),
+  }));
 
   const getCoffees = async () => {
     const response = await fetchData();
     setData(response);
   };
+
+  const handleAddCard = (cardId: number) => {
+    setAddedCards((prev = []) => [
+      ...prev,
+      { id: prev.length + 1, card: { id: cardId }, quantity: 1 },
+    ]);
+  };
+
+  useEffect(() => {
+    getCoffees();
+    fetchCards();
+  }, []);
 
   return (
     <>
@@ -42,7 +74,7 @@ export function Home() {
         <StyledImg src={Coffee} />
       </HomeContainer>
       <HomeCardContent>
-        {data?.map((card) => (
+        {mergedData?.map((card) => (
           <CardVertical
             id={card.id}
             key={card.id}
@@ -51,6 +83,8 @@ export function Home() {
             text={card.text}
             tags={card.tags}
             price={card.price}
+            isAddedToCart={card.isAddedToCart}
+            onAddCard={handleAddCard}
           />
         ))}
       </HomeCardContent>

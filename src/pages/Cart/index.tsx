@@ -7,14 +7,18 @@ import {
 import { CardHorizontal } from "../../components/CardHorizontal";
 import { CartContainer } from "./styles";
 import Swal from "sweetalert2";
+import { useCart } from "../../context/cartContext";
 
 export function Cart() {
   const [data, setData] = useState<UserCardsResponse[] | undefined>([]);
-  const userId = 1; // Replace with dynamic user ID as needed
+  const userId = 1;
+
+  const { setCartItemsValue } = useCart();
 
   const fetchCards = async () => {
     try {
       const response = await fetchCardById(userId);
+
       setData(response);
     } catch (error) {
       console.error("Failed to fetch cards:", error);
@@ -22,13 +26,13 @@ export function Cart() {
     }
   };
 
-  const handleRemove = async (id: number) => {
+  const handleRemove = async (id: number, quantity: number) => {
     try {
-      // Remove the card by setting quantity to 0
       await updateUserCards(userId, { cardId: id, quantity: 0 });
 
-      // Update local state
       setData((prev) => prev?.filter((item) => item.card.id !== id));
+
+      setCartItemsValue((prev: number) => prev - quantity);
 
       Swal.fire("Removido", "Café removido do carrinho.", "success");
     } catch (error) {
@@ -36,23 +40,6 @@ export function Cart() {
       Swal.fire("Erro", "Falha ao remover o café.", "error");
     }
   };
-
-  // const handleQuantityUpdate = async (id: number, quantity: number) => {
-  //   try {
-  //     await updateUserCards(userId, { cardId: id, quantity });
-
-  //     setData((prev) =>
-  //       prev?.map((item) =>
-  //         item.card.id === id ? { ...item, quantity } : item
-  //       )
-  //     );
-
-  //     Swal.fire("Atualizado", "Quantidade atualizada com sucesso.", "success");
-  //   } catch (error) {
-  //     console.error("Failed to update quantity:", error);
-  //     Swal.fire("Erro", "Falha ao atualizar a quantidade.", "error");
-  //   }
-  // };
 
   useEffect(() => {
     fetchCards();
