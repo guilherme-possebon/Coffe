@@ -4,6 +4,7 @@ import {
   HeaderContent,
   HeaderLogo,
   InfosContainer,
+  Limit,
   LocationContainer,
   NumberOfCoffees,
 } from "./styles";
@@ -18,7 +19,8 @@ export function Header() {
   const [isFixed, setIsFixed] = useState(false);
   const cartRef = useRef<HTMLDivElement>(null);
   const [cartItems, setCartItems] = useState<number | undefined>(0);
-  const { cartItemsValue } = useCart(); // Get the cart item count from context
+  const { cartItemsValue } = useCart();
+  const [hasTwoChar, setHasTwoChar] = useState<boolean>(false);
 
   const getCartItemsQuantity = async () => {
     const result = await fetchUserCartItemCount(1);
@@ -27,7 +29,13 @@ export function Header() {
 
   useEffect(() => {
     getCartItemsQuantity();
-  }, [cartItemsValue]);
+
+    if (cartItems && cartItems >= 10) {
+      setHasTwoChar(true);
+    } else {
+      setHasTwoChar(false);
+    }
+  }, [cartItems, cartItemsValue]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -61,16 +69,18 @@ export function Header() {
           <HeaderLogo src={Logo} />
           <InfosContainer>
             <LocationContainer>
-              <MapPin size={24} weight="fill" />
+              <MapPin size={32} weight="fill" />
               <CurrentLocation />
             </LocationContainer>
             <div ref={cartRef}>
-              <CartHeaderContainer to={"/cart"} $isFixed={isFixed}>
-                <ShoppingCartSimple size={24} weight="fill" />
-                <NumberOfCoffees>
-                  {cartItems != undefined && cartItems > 0 ? cartItems : ""}
-                </NumberOfCoffees>
-              </CartHeaderContainer>
+              <Limit to={"/cart"} $isFixed={isFixed}>
+                <CartHeaderContainer>
+                  <ShoppingCartSimple size={32} weight="fill" />
+                  <NumberOfCoffees $hasTwoChar={hasTwoChar}>
+                    {cartItems && cartItems > 0 ? cartItems : ""}
+                  </NumberOfCoffees>
+                </CartHeaderContainer>
+              </Limit>
             </div>
           </InfosContainer>
         </HeaderContent>

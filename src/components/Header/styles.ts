@@ -6,6 +6,10 @@ interface CartContainerProps {
   $isFixed: boolean;
 }
 
+interface NumberOfCoffeesProps {
+  $hasTwoChar: boolean;
+}
+
 export const HeaderContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -62,9 +66,10 @@ export const LocationContainer = styled.div`
   }
 `;
 
-export const CartHeaderContainer = styled(Link)<CartContainerProps>`
+export const CartHeaderContainer = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   background-color: ${(props) => props.theme["yellow-light"]};
   color: ${(props) => props.theme["yellow-dark"]};
   padding: 8px;
@@ -75,6 +80,28 @@ export const CartHeaderContainer = styled(Link)<CartContainerProps>`
   text-decoration: none;
   position: relative;
 
+  &:hover {
+    background-color: ${(props) => props.theme["yellow"]};
+    color: ${(props) => props.theme["yellow-light"]};
+  }
+`;
+
+export const NumberOfCoffees = styled.div<NumberOfCoffeesProps>`
+  position: absolute;
+  top: 14px;
+  left: ${(props) => (props.$hasTwoChar ? "17px" : "22px")};
+
+  color: ${(props) => props.theme["yellow-light"]};
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+
+  &:hover {
+    color: ${(props) => props.theme["yellow-dark"]};
+  }
+`;
+
+export const Limit = styled(Link)<CartContainerProps>`
   position: ${(props) => (props.$isFixed ? "fixed" : "static")};
   top: ${(props) => (props.$isFixed ? "6px" : "auto")};
   right: ${(props) => (props.$isFixed ? "6px" : "auto")};
@@ -83,25 +110,6 @@ export const CartHeaderContainer = styled(Link)<CartContainerProps>`
   @media ${device.desktop} {
     top: ${(props) => (props.$isFixed ? "10px" : "auto")};
     right: auto;
-  }
-
-  &:hover {
-    background-color: ${(props) => props.theme["yellow"]};
-    color: ${(props) => props.theme["yellow-light"]};
-  }
-`;
-
-export const NumberOfCoffees = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: ${(props) => props.theme["yellow-dark"]};
-  color: ${(props) => props.theme["yellow-light"]};
-  border-radius: 50%;
-
-  &:hover {
-    background-color: ${(props) => props.theme["yellow"]};
-    color: ${(props) => props.theme["yellow-light"]};
   }
 `;
 
