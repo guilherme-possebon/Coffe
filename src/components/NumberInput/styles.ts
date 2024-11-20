@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../../styles/global";
 
 export const NumberInputConfig = styled.input.attrs({
   type: "number",
@@ -35,7 +36,12 @@ export const NumberInputStyled = styled(NumberInputConfig)`
   background-color: ${(props) => props.theme["base-button"]};
   color: ${(props) => props.theme["base-text"]};
 
-  font-size: 16px;
+  font-size: 12px;
+
+  @media ${device.phone} {
+    font-size: 16px;
+  }
+
   line-height: 130%;
   font-family: "Roboto", serif;
   font-style: normal;
@@ -53,7 +59,11 @@ export const NumberInputContainer = styled.div`
   align-items: center;
   justify-content: center;
   gap: 4px;
-  padding: 8px;
+  padding: 7px;
   border-radius: 6px;
   background-color: ${(props) => props.theme["base-button"]};
+
+  @media ${device.phone} {
+    padding: 7px;
+  }
 `;

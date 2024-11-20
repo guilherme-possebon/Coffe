@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { PriceColor } from "../../styles/global";
-import { NumberInput } from "../NumberInput";
+import { PriceColor } from "../../../../styles/global";
+import { NumberInput } from "../../../../components/NumberInput";
 import {
   CardTitle,
   HorizontalContainer,
@@ -36,7 +36,7 @@ export function CardHorizontal({
       <ImgCoffeeCard src={imgSrc} alt={title} />
       <InfosCardContainer>
         <Infos>
-          <CardTitle>{title}</CardTitle>
+          <CardTitle $fontWeight="normal"> {title}</CardTitle>
           <InputsContainer>
             <NumberInput quantity={quantity} setQuantity={setQuantity} />
             <RemoveContainer
@@ -48,7 +48,9 @@ export function CardHorizontal({
             </RemoveContainer>
           </InputsContainer>
         </Infos>
-        <PriceColor $price={false}>R$ {quantity * price}</PriceColor>
+        <PriceColor $price={false}>
+          R$ {(quantity * price).toFixed(2)}
+        </PriceColor>
       </InfosCardContainer>
     </HorizontalContainer>
   );

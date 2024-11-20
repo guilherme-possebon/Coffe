@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { device } from "../../styles/global";
-import { Link } from "react-router-dom";
 
 interface CartContainerProps {
   $isFixed: boolean;
@@ -89,23 +88,27 @@ export const CartHeaderContainer = styled.div`
 export const NumberOfCoffees = styled.div<NumberOfCoffeesProps>`
   position: absolute;
   top: 14px;
-  left: ${(props) => (props.$hasTwoChar ? "17px" : "22px")};
+  left: 2px;
 
   color: ${(props) => props.theme["yellow-light"]};
   border-radius: 50%;
   width: 48px;
   height: 48px;
 
+  z-index: 100;
+
   &:hover {
     color: ${(props) => props.theme["yellow-dark"]};
   }
 `;
 
-export const Limit = styled(Link)<CartContainerProps>`
+export const Limit = styled.button<CartContainerProps>`
   position: ${(props) => (props.$isFixed ? "fixed" : "static")};
   top: ${(props) => (props.$isFixed ? "6px" : "auto")};
   right: ${(props) => (props.$isFixed ? "6px" : "auto")};
   z-index: 99;
+  border: none;
+  background-color: transparent;
 
   @media ${device.desktop} {
     top: ${(props) => (props.$isFixed ? "10px" : "auto")};

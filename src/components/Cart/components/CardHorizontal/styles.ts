@@ -1,15 +1,14 @@
 import { Trash } from "@phosphor-icons/react";
 import styled from "styled-components";
-import { TitleM } from "../../styles/global";
+import { device, TextM } from "../../../../styles/global";
 
 export const HorizontalContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 20px;
-  width: 360px;
+  gap: 8px;
 `;
 
-export const CardTitle = styled(TitleM)`
+export const CardTitle = styled(TextM)`
   font-size: 16px;
 `;
 
@@ -17,6 +16,7 @@ export const InfosCardContainer = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  width: 100%;
 `;
 
 export const InputsContainer = styled.div`
@@ -35,6 +35,11 @@ export const RemoveContainer = styled.button`
   transition: background-color 0.2s ease-in-out;
   cursor: pointer;
   border: none;
+  font-size: 12px;
+
+  @media ${device.phone} {
+    font-size: 16px;
+  }
 
   &:hover {
     background-color: ${(props) => props.theme["base-hover"]};
@@ -49,6 +54,7 @@ export const Infos = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 12px;
 `;
 
 export const ImgCoffeeCard = styled.img`

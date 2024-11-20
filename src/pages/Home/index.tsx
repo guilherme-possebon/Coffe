@@ -1,14 +1,3 @@
-import { TextL, TitleXl } from "../../styles/global";
-import { Guarantees } from "./components/Guarantees";
-import {
-  HomeCardContent,
-  HomeContainer,
-  HomeContent,
-  StyledImg,
-  TitleContainer,
-} from "./styles";
-import Coffee from "../../assets/coffee.png";
-import { CardVertical } from "./components/CardVertical";
 import { useEffect, useState } from "react";
 import {
   ApiResponse,
@@ -17,10 +6,26 @@ import {
   fetchUserCards,
 } from "../../api/api";
 import Swal from "sweetalert2";
+import { CardVertical } from "./components/CardVertical";
+import {
+  HomeContainer,
+  HomeContent,
+  TitleContainer,
+  StyledImg,
+  HomeCardContent,
+} from "./styles";
+import Coffee from "../../assets/coffee.png";
+import { TitleXl, TextL } from "../../styles/global";
+import { Guarantees } from "./components/Guarantees";
+import { CartDrawer } from "../../components/Header/components/CartDrawer";
+import { useCart } from "../../context/cartContext";
 
 export function Home() {
   const [data, setData] = useState<ApiResponse[] | undefined>([]);
   const [addedCards, setAddedCards] = useState<CardsIdsType[] | undefined>([]);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const { cartItemsValue } = useCart();
 
   const fetchCards = async () => {
     try {
@@ -34,9 +39,9 @@ export function Home() {
 
   const mergedData = data?.map((card) => ({
     ...card,
-    isAddedToCart: addedCards?.some(
-      (addedCard) => addedCard.card.id === card.id
-    ),
+    isAddedToCart:
+      addedCards &&
+      addedCards.some((addedCard) => addedCard.card.id === card.id),
   }));
 
   const getCoffees = async () => {
@@ -51,9 +56,16 @@ export function Home() {
     ]);
   };
 
+  const toggleDrawer = () => {
+    setIsDrawerOpen((prev) => !prev);
+  };
+
+  useEffect(() => {
+    fetchCards();
+  }, [cartItemsValue]);
+
   useEffect(() => {
     getCoffees();
-    fetchCards();
   }, []);
 
   return (
@@ -85,9 +97,12 @@ export function Home() {
             price={card.price}
             isAddedToCart={card.isAddedToCart}
             onAddCard={handleAddCard}
+            onOpenDrawer={toggleDrawer}
           />
         ))}
       </HomeCardContent>
+
+      <CartDrawer isOpen={isDrawerOpen} onClose={toggleDrawer} />
     </>
   );
 }

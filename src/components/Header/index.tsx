@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import {
   CartHeaderContainer,
   HeaderContainer,
@@ -11,12 +12,13 @@ import {
 import Logo from "../../assets/logo.png";
 import { MapPin, ShoppingCartSimple } from "@phosphor-icons/react";
 import { CurrentLocation } from "./components/CurrentLocation";
-import { useEffect, useRef, useState } from "react";
 import { fetchUserCartItemCount } from "../../api/api";
 import { useCart } from "../../context/cartContext";
+import { CartDrawer } from "./components/CartDrawer";
 
 export function Header() {
   const [isFixed, setIsFixed] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const cartRef = useRef<HTMLDivElement>(null);
   const [cartItems, setCartItems] = useState<number | undefined>(0);
   const { cartItemsValue } = useCart();
@@ -24,11 +26,14 @@ export function Header() {
 
   const getCartItemsQuantity = async () => {
     const result = await fetchUserCartItemCount(1);
+    console.log("rodou funcao");
     setCartItems(result);
   };
 
   useEffect(() => {
     getCartItemsQuantity();
+
+    console.log("roodu useEffect");
 
     if (cartItems && cartItems >= 10) {
       setHasTwoChar(true);
@@ -62,6 +67,10 @@ export function Header() {
     };
   }, [isFixed]);
 
+  const toggleDrawer = () => {
+    setIsDrawerOpen((prev) => !prev);
+  };
+
   return (
     <>
       <HeaderContainer>
@@ -73,7 +82,7 @@ export function Header() {
               <CurrentLocation />
             </LocationContainer>
             <div ref={cartRef}>
-              <Limit to={"/cart"} $isFixed={isFixed}>
+              <Limit type="button" $isFixed={isFixed} onClick={toggleDrawer}>
                 <CartHeaderContainer>
                   <ShoppingCartSimple size={32} weight="fill" />
                   <NumberOfCoffees $hasTwoChar={hasTwoChar}>
@@ -85,6 +94,9 @@ export function Header() {
           </InfosContainer>
         </HeaderContent>
       </HeaderContainer>
+      {isDrawerOpen && (
+        <CartDrawer isOpen={isDrawerOpen} onClose={toggleDrawer} />
+      )}
     </>
   );
 }

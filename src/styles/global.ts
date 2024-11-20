@@ -29,7 +29,6 @@ const DefaultConfigForText = styled.p`
 
 const DefaultConfigForButton = styled.button`
   color: ${(props) => props.theme["base-button"]};
-  line-height: 160%;
   font-family: "Roboto", serif;
   font-style: normal;
 
@@ -45,23 +44,31 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  :focus {
-    outline: none;
-    box-shadow: 0 0 0 2px ${(props) => props.theme.purple};
-  }
 
   body {
     background: ${(props) => props.theme.background};
     color: ${(props) => props.theme["base-text"]};
     width: 100%;
 
-    ;
+    &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #9e9e9e;
+    background-clip: content-box;
+  }
   }
 
   body, input, textarea, button {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 1rem;
+
   }
 `;
 

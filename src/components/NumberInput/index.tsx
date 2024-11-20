@@ -7,7 +7,7 @@ import { Minus, Plus } from "@phosphor-icons/react";
 
 interface NumberInputProps {
   quantity: number;
-  setQuantity: (newQuantity: number) => void; // Updated type
+  setQuantity: (newQuantity: number) => void;
 }
 
 export function NumberInput({ quantity, setQuantity }: NumberInputProps) {

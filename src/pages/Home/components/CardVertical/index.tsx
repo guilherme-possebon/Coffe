@@ -16,7 +16,6 @@ import Swal from "sweetalert2";
 import { addUserCards, UserCardPayload } from "../../../../api/api";
 import { NumberInput } from "../../../../components/NumberInput";
 import { useCart } from "../../../../context/cartContext";
-import { Link } from "react-router-dom";
 
 interface CardProps {
   id: number;
@@ -27,6 +26,7 @@ interface CardProps {
   price: string;
   isAddedToCart: boolean | undefined;
   onAddCard: (cardId: number) => void;
+  onOpenDrawer: () => void;
 }
 
 export function CardVertical({
@@ -38,6 +38,7 @@ export function CardVertical({
   id,
   isAddedToCart,
   onAddCard,
+  onOpenDrawer,
 }: CardProps) {
   const [quantity, setQuantity] = useState<number>(1);
   const { setCartItemsValue } = useCart();
@@ -70,7 +71,7 @@ export function CardVertical({
 
       onAddCard(id);
 
-      setCartItemsValue((prev: number) => prev + quantity);
+      setCartItemsValue((prev: number) => prev + 1);
 
       Toast.fire({
         icon: "success",
@@ -83,6 +84,10 @@ export function CardVertical({
         title: "Falha ao adicionar o café!",
       });
     }
+  };
+
+  const handleOpenDrawer = () => {
+    onOpenDrawer();
   };
 
   return (
@@ -101,7 +106,7 @@ export function CardVertical({
         </Price>
         {isAddedToCart ? (
           <>
-            <CartContainer as={Link} to={"/cart"}>
+            <CartContainer type="button" onClick={handleOpenDrawer}>
               <ShoppingCartSimple size={24} weight="fill" />
             </CartContainer>
           </>

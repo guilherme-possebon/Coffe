@@ -60,8 +60,7 @@ export const fetchData = async (): Promise<ApiResponse[] | undefined> => {
 
 export const addUserCards = async (payload: UserCardPayload): Promise<void> => {
   try {
-    const response = await axios.post(`${apiUrl}/user-cards`, payload);
-    console.log("User cards updated successfully:", response.data);
+    await axios.post(`${apiUrl}/user-cards`, payload);
   } catch (error) {
     console.error("Error adding/updating user cards:", error);
     throw error;
@@ -72,6 +71,7 @@ export const fetchCardById = async (
   id: number
 ): Promise<UserCardsResponse[] | undefined> => {
   try {
+    console.log(1);
     const response = await axios.get(`${apiUrl}/user-cards/${id}/cards`);
     return response.data;
   } catch (error) {
@@ -83,6 +83,7 @@ export const fetchUserCards = async (
   id: number
 ): Promise<CardsIdsType[] | undefined> => {
   try {
+    console.log(2);
     const response = await axios.get(`${apiUrl}/user-cards/${id}/cardsid`);
     return response.data;
   } catch (error) {
