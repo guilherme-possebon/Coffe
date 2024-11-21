@@ -25,8 +25,8 @@ export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
-  height: 400px;
-  gap: 48px;
+  height: calc(100vh - 250px);
+  gap: 32px;
 
   &::-webkit-scrollbar {
     width: 5px;

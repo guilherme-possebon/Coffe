@@ -16,7 +16,13 @@ import {
   SelectedCoffees,
   SessionContainer,
 } from "./styles";
-import { TextL, TextS, TitleXs } from "../../../../styles/global";
+import {
+  ButtonGeneric,
+  TextL,
+  TextS,
+  TitleXs,
+} from "../../../../styles/global";
+import { Link } from "react-router-dom";
 
 export function Cart() {
   const [data, setData] = useState<UserCardsResponse[]>([]);
@@ -25,7 +31,6 @@ export function Cart() {
 
   const { setCardsIds, setCartItemsValue } = useCart();
 
-  // Fetch cards from API
   const fetchCards = async () => {
     try {
       const response = await fetchCardById(userId);
@@ -83,41 +88,50 @@ export function Cart() {
   return (
     <CartContainer>
       <SelectedCoffees>
-        <TitleXs>Conteúdo do carrinho</TitleXs>
-        <SessionContainer>
-          <CardContainer>
-            {data.map((info) => (
-              <div key={info.card.id}>
-                <CardHorizontal
-                  id={info.card.id}
-                  imgSrc={info.card.imgSrc}
-                  price={info.card.price}
-                  title={info.card.title}
-                  quantityNumber={info.quantity}
-                  onRemove={handleRemove}
-                  onQuantityChange={handleQuantityChange}
-                />
-                <Devider />
-              </div>
-            ))}
-          </CardContainer>
-          <PaymentContainer>
-            <PaymentInfos>
-              <TextS $fontWeight="normal">Total em itens</TextS>
-              <TextS $fontWeight="normal">R$ {totalValue.toFixed(2)}</TextS>
-            </PaymentInfos>
-            <PaymentInfos>
-              <TextS $fontWeight="normal">Entrega</TextS>
-              <TextS $fontWeight="normal">R$ 3,50</TextS>
-            </PaymentInfos>
-            <PaymentInfos>
-              <TextL $fontWeight="bold">Total</TextL>
-              <TextL $fontWeight="bold">
-                R$ {(totalValue + 3.5).toFixed(2)}
-              </TextL>
-            </PaymentInfos>
-          </PaymentContainer>
-        </SessionContainer>
+        {data.length == 0 ? (
+          <>Tente adicionar conteudo no carrinho!</>
+        ) : (
+          <>
+            <TitleXs>Conteúdo do carrinho</TitleXs>
+            <SessionContainer>
+              <CardContainer>
+                {data.map((info) => (
+                  <>
+                    <CardHorizontal
+                      id={info.card.id}
+                      imgSrc={info.card.imgSrc}
+                      price={info.card.price}
+                      title={info.card.title}
+                      quantityNumber={info.quantity}
+                      onRemove={handleRemove}
+                      onQuantityChange={handleQuantityChange}
+                    />
+                    <Devider key={info.id} />
+                  </>
+                ))}
+              </CardContainer>
+              <PaymentContainer>
+                <PaymentInfos>
+                  <TextS $fontWeight="normal">Total em itens</TextS>
+                  <TextS $fontWeight="normal">R$ {totalValue.toFixed(2)}</TextS>
+                </PaymentInfos>
+                <PaymentInfos>
+                  <TextS $fontWeight="normal">Entrega</TextS>
+                  <TextS $fontWeight="normal">R$ 3,50</TextS>
+                </PaymentInfos>
+                <PaymentInfos>
+                  <TextL $fontWeight="bold">Total</TextL>
+                  <TextL $fontWeight="bold">
+                    R$ {(totalValue + 3.5).toFixed(2)}
+                  </TextL>
+                </PaymentInfos>
+                <ButtonGeneric as={Link} to={"/checkout"} $color="paymentColor">
+                  Confirmar pedido
+                </ButtonGeneric>
+              </PaymentContainer>
+            </SessionContainer>
+          </>
+        )}
       </SelectedCoffees>
     </CartContainer>
   );

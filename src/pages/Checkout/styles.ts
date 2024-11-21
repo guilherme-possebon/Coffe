@@ -33,18 +33,25 @@ export const StyledDollar = styled(CurrencyDollar)`
   color: ${(props) => props.theme.purple};
 `;
 
-export const PaymentContainer = styled(BackgroundConfig)``;
-
 export const OrderContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
 `;
 
-export const ButtonContainer = styled.div`
+export const SessionContainer = styled(BackgroundConfig)`
   display: flex;
-  gap: 12px;
+  flex-direction: column;
+  gap: 16px;
 `;
 
-export const InputContainer = styled.div``;
+export const ButtonContainer = styled.fieldset`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  border: none;
+`;
+
 export const OrderContent = styled.div``;
+
+export const InputContainer = styled.form``;

@@ -37,7 +37,9 @@ export const DrawerContent = styled.div<{ $isOpen: boolean }>`
   top: 0;
   right: 0;
   height: 100%;
-  width: 320px;
+  width: 100%;
+  max-width: 400px;
+
   background: white;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
   animation: ${(props) => (props.$isOpen ? slideIn : slideOut)} 0.3s ease-in-out;

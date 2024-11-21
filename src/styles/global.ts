@@ -4,6 +4,10 @@ interface TextProps {
   $fontWeight: string;
 }
 
+interface ButtonProps {
+  $color: "default" | "paymentColor";
+}
+
 export const device = {
   pocket: `(max-width: 600px)`,
   phone: `(min-width: 600px)`,
@@ -144,4 +148,38 @@ export const PriceColor = styled(TitleM)<PriceProps>`
   color: ${(props) => props.theme["base-text"]};
   font-weight: ${(props) => (props.$price ? 800 : 700)};
   font-size: ${(props) => (props.$price ? "24px" : "16px")};
+`;
+
+export const ButtonGeneric = styled.button<ButtonProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+
+  background-color: ${(props) =>
+    props.$color == "paymentColor"
+      ? props.theme.yellow
+      : props.theme["base-button"]};
+
+  color: ${(props) =>
+    props.$color == "paymentColor"
+      ? props.theme.white
+      : props.theme["base-text"]};
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: ${(props) =>
+      props.$color == "paymentColor"
+        ? props.theme["yellow-dark"]
+        : props.theme["base-hover"]};
+  }
+
+  & svg {
+    color: ${(props) => props.theme.purple};
+  }
 `;

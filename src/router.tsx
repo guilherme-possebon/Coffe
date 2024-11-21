@@ -4,7 +4,7 @@ import { DefaultLayout } from "./layout/DefaultLayout";
 import { Home } from "./pages/Home/index";
 
 import { LayoutWithOutHeader } from "./layout/LayoutWithOutHeader";
-import { Cart } from "./components/Header/components/Cart";
+import { Checkout } from "./pages/Checkout";
 
 export function Router() {
   return (
@@ -14,8 +14,8 @@ export function Router() {
           <Route path="/" element={<Home />} />
           <Route path="/entrega" element={<Entrega />} />
         </Route>
-        <Route path="/cart" element={<LayoutWithOutHeader />}>
-          <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<LayoutWithOutHeader />}>
+          <Route path="/checkout" element={<Checkout />} />
         </Route>
       </Routes>
     </>

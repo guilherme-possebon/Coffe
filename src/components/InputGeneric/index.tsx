@@ -8,6 +8,8 @@ interface InputGenericInterface {
   textLabelOptimal?: string;
   mHorizontal: boolean;
   idLabel: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string;
 }
 
 export function InputGeneric({
@@ -18,6 +20,8 @@ export function InputGeneric({
   limit,
   mHorizontal,
   idLabel,
+  onChange,
+  value,
 }: InputGenericInterface) {
   return (
     <InputContainer $width={width} $mHorizontal={mHorizontal}>
@@ -27,6 +31,8 @@ export function InputGeneric({
           type={type}
           placeholder={textLabelOptimal}
           maxLength={limit}
+          onChange={onChange}
+          value={value}
         />
       ) : (
         <InputStyled
@@ -34,6 +40,8 @@ export function InputGeneric({
           type={type}
           placeholder=" "
           maxLength={limit}
+          onChange={onChange}
+          value={value}
         />
       )}
       <LabelStyled htmlFor={idLabel}>{textLabel}</LabelStyled>

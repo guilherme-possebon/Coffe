@@ -6,11 +6,10 @@ export const LayoutContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
   overflow-x: hidden;
+  height: 100vh;
 
   @media ${device.laptop} {
-    padding: 3rem;
   }
 `;
 

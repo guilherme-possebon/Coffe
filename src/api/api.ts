@@ -49,6 +49,18 @@ export interface UpdateUserCardPayload {
   quantity: number;
 }
 
+export interface FormInterface {
+  userId: number;
+  rua: string;
+  bairro: string;
+  cep: string;
+  cidade: string;
+  complemento: string;
+  numero: string;
+  uf: string;
+  paymentOption: string;
+}
+
 export const fetchData = async (): Promise<ApiResponse[] | undefined> => {
   try {
     const response = await axios.get(apiUrl + "/cards");
@@ -71,7 +83,6 @@ export const fetchCardById = async (
   id: number
 ): Promise<UserCardsResponse[] | undefined> => {
   try {
-    console.log(1);
     const response = await axios.get(`${apiUrl}/user-cards/${id}/cards`);
     return response.data;
   } catch (error) {
@@ -83,7 +94,6 @@ export const fetchUserCards = async (
   id: number
 ): Promise<CardsIdsType[] | undefined> => {
   try {
-    console.log(2);
     const response = await axios.get(`${apiUrl}/user-cards/${id}/cardsid`);
     return response.data;
   } catch (error) {
@@ -113,5 +123,50 @@ export const fetchUserCartItemCount = async (
   } catch (error) {
     console.error("Error fetching user cart item count:", error);
     return undefined;
+  }
+};
+
+export const createForm = async (payload: {
+  userId: number;
+  rua: string;
+  bairro: string;
+  cep: string;
+  cidade: string;
+  complemento: string;
+  numero: string;
+  uf: string;
+  paymentOption: string;
+}): Promise<FormInterface> => {
+  try {
+    const response = await axios.post(`${apiUrl}/forms`, payload);
+    return response.data;
+  } catch (error) {
+    console.error("Error creating form:", error);
+    throw error;
+  }
+};
+
+export const fetchFormById = async (id: number): Promise<FormInterface> => {
+  try {
+    const response = await axios.get(`${apiUrl}/forms/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching form by ID:", error);
+    throw error;
+  }
+};
+
+export const fetchLastFormByUser = async (
+  userId: number
+): Promise<FormInterface> => {
+  try {
+    const response = await axios.get(`${apiUrl}/forms/user/${userId}`);
+    console.log(response.data, "response");
+    const lastForm = response.data;
+    console.log(lastForm, "lastForm");
+    return lastForm;
+  } catch (error) {
+    console.error("Error fetching last form by user:", error);
+    throw error;
   }
 };
