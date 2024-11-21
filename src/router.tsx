@@ -4,7 +4,7 @@ import { DefaultLayout } from "./layout/DefaultLayout";
 import { Home } from "./pages/Home/index";
 
 import { LayoutWithOutHeader } from "./layout/LayoutWithOutHeader";
-import { Cart } from "./components/Cart";
+import { Cart } from "./components/Header/components/Cart";
 
 export function Router() {
   return (

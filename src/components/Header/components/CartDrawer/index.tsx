@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { CloseButton, DrawerContent, DrawerOverlay } from "./styles";
-import { Cart } from "../../../Cart";
+import { Cart } from "../Cart/index";
 
 export function CartDrawer({
   isOpen,

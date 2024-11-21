@@ -1,6 +1,6 @@
 import { Trash } from "@phosphor-icons/react";
 import styled from "styled-components";
-import { device, TextM } from "../../../../styles/global";
+import { device, TextM } from "../../../../../../styles/global";
 
 export const HorizontalContainer = styled.div`
   display: flex;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { device } from "../../styles/global";
+import { device } from "../../../../styles/global";
 
 export const CartContainer = styled.div`
   display: flex;
@@ -15,12 +15,18 @@ export const CartContainer = styled.div`
   }
 `;
 
+export const Devider = styled.div`
+  border: 1px solid ${(props) => props.theme["base-button"]};
+  height: 2px;
+  width: 100%;
+`;
+
 export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
   height: 400px;
-  gap: 16px;
+  gap: 48px;
 
   &::-webkit-scrollbar {
     width: 5px;
@@ -45,4 +51,16 @@ export const SessionContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+`;
+
+export const PaymentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+
+export const PaymentInfos = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;

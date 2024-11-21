@@ -37,10 +37,11 @@ export const DrawerContent = styled.div<{ $isOpen: boolean }>`
   top: 0;
   right: 0;
   height: 100%;
-  width: 300px;
+  width: 320px;
   background: white;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
   animation: ${(props) => (props.$isOpen ? slideIn : slideOut)} 0.3s ease-in-out;
+  background-color: ${(props) => props.theme["base-card"]};
 `;
 
 export const CloseButton = styled.button`

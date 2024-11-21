@@ -2,7 +2,6 @@ import { Bank, CreditCard, Money } from "@phosphor-icons/react";
 import { ButtonGeneric } from "../../components/ButtonGeneric";
 import { InputGeneric } from "../../components/InputGeneric";
 import { TextM, TextS, TitleXs } from "../../styles/global";
-import { SessionContainer } from "../Cart/styles";
 import {
   ButtonContainer,
   InputContainer,
@@ -15,6 +14,7 @@ import {
   StyledMapPin,
   TitleContainer,
 } from "./styles";
+import { SessionContainer } from "../../components/Header/components/Cart/styles";
 
 export function Checkout() {
   return (
