@@ -31,7 +31,13 @@ export function CardHorizontal({
   quantityNumber,
 }: CardProps) {
   const handleQuantityChange = (newQuantity: number) => {
-    onQuantityChange(id, newQuantity);
+    if (newQuantity === 0) {
+      console.log("remove");
+      onRemove(id);
+    } else {
+      onQuantityChange(id, newQuantity);
+      console.log("else");
+    }
   };
 
   return (

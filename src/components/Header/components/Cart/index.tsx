@@ -48,12 +48,31 @@ export function Cart() {
 
   const handleRemove = async (id: number) => {
     try {
-      await updateUserCards(userId, { cardId: id, quantity: 0 });
-
-      setData((prev) => prev.filter((item) => item.card.id !== id));
-      setCartItemsValue((prev) => Math.max(prev - 1, 0));
-
-      Swal.fire("Removido", "Café removido do carrinho.", "success");
+      Swal.fire({
+        title: "Tem certeza?",
+        text: "Você não poderá reverter isso!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sim, remover!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          updateUserCards(userId, { cardId: id, quantity: 0 }).then(
+            (resultUpdate) => {
+              if (resultUpdate) {
+                setData((prev) => prev.filter((item) => item.card.id !== id));
+                setCartItemsValue((prev) => Math.max(prev - 1, 0));
+                Swal.fire({
+                  title: "Removido!",
+                  text: "Café removido com sucesso!.",
+                  icon: "success",
+                });
+              }
+            }
+          );
+        }
+      });
     } catch (error) {
       console.error("Failed to remove card:", error);
       Swal.fire("Erro", "Falha ao remover o café.", "error");

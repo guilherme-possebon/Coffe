@@ -19,7 +19,9 @@ export function NumberInput({ quantity, setQuantity }: NumberInputProps) {
   };
 
   const handleMinus = () => {
-    if (quantity > 1) {
+    if (quantity === 1) {
+      setQuantity(0);
+    } else if (quantity > 1) {
       setQuantity(quantity - 1);
     }
   };
